@@ -5,9 +5,14 @@ For detailed command-line flags, see [Official instructions](https://github.com/
 
 ## Usage
 
+Build image:
+```
+docker build -t comfyui https://github.com/veka-server/docker-comfyui.git
+```
+
 Basic example:
 ```
-docker run --gpus all --restart unless-stopped -p 8188:8188 --name comfyui -d universonic/comfyui
+docker run --gpus all --restart unless-stopped -p 8188:8188 --name comfyui -d comfyui
 ```
 
 Use SSL/TLS:
@@ -15,7 +20,7 @@ Use SSL/TLS:
 docker run --gpus all --restart unless-stopped -p 8188:8188 \
   -v /my/key.pem:/app/key.pem \
   -v /my/cert.pem:/app/cert.pem \
-  --name comfyui -d universonic/comfyui --tls-keyfile /app/key.pem --tls-certfile /app/cert.pem
+  --name comfyui -d comfyui --tls-keyfile /app/key.pem --tls-certfile /app/cert.pem
 ```
 
 ### Where to Store Data
@@ -26,11 +31,15 @@ We will simply show the basic procedure here:
 1. Create a data directory on a suitable volume on your host system, e.g. `/my/own/datadir`.
 2. Start your `comfyui` container like this:
 ```
-docker run --gpus all --restart unless-stopped -p 8188:8188 \
-  -v /my/own/datadir/checkpoints:/app/comfyui/models/checkpoints \
-  -v /my/own/datadir/output:/app/comfyui/output \
-  -v /my/own/datadir/input:/app/comfyui/input \
-  --name comfyui -d universonic/comfyui
+docker run \
+-- rm \
+--gpus all \
+--restart unless-stopped \
+-p 8188:8188  \
+-v /home/veka/models/checkpoints:/app/comfyui/models/checkpoints \
+-v /home/veka/models/output:/app/comfyui/output \
+--name comfyui \
+ -d comfyui
 ```
 3. Troubleshooting with the following command if you encountered problems:
 ```
