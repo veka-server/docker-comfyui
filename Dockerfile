@@ -46,6 +46,4 @@ VOLUME /app/comfyui/models/vae_approx
 
 EXPOSE 8188
 
-RUN iptables -I OUTPUT -o eth0 -j DROP
-
 ENTRYPOINT ["/app/entrypoint.sh", "--listen", "0.0.0.0", "--port", "8188", "--preview-method", "auto"]
