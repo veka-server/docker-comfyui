@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   comfyui:
     build: .  # Utilise le Dockerfile dans le répertoire courant
