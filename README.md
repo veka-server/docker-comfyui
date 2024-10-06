@@ -32,7 +32,7 @@ We will simply show the basic procedure here:
 2. Start your `comfyui` container like this:
 ```
 docker run \
---rm \
+--restart unless-stopped \
 --gpus all \
 -p 8188:8188  \
 -v /home/veka/models/checkpoints:/app/comfyui/models/checkpoints \
