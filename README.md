@@ -32,14 +32,13 @@ We will simply show the basic procedure here:
 2. Start your `comfyui` container like this:
 ```
 docker run \
--- rm \
+--rm \
 --gpus all \
---restart unless-stopped \
 -p 8188:8188  \
 -v /home/veka/models/checkpoints:/app/comfyui/models/checkpoints \
 -v /home/veka/models/output:/app/comfyui/output \
 --name comfyui \
- -d comfyui
+-d comfyui 
 ```
 3. Troubleshooting with the following command if you encountered problems:
 ```
