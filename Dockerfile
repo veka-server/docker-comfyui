@@ -15,6 +15,7 @@ USER comfyui
 WORKDIR /app
 
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git comfyui
+RUN git clone https://github.com/city96/ComfyUI-GGUF comfyui/custom_nodes/gguf
 
 WORKDIR /app/comfyui
 
@@ -24,6 +25,7 @@ FROM minimal as nvidia
 RUN python3 -m venv venv && \
     . venv/bin/activate && \
     pip install torch torchvision torchaudio timm simpleeval accelerate --extra-index-url https://download.pytorch.org/whl/cu121 && \
+    pip install -r /ComfyUI/custom_nodex/ComfyUI-GGUF/requirements.txt && \
     pip install -r requirements.txt
 
 VOLUME /app/comfyui/output
