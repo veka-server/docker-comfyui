@@ -18,7 +18,7 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git comfyui
 
 WORKDIR /app/comfyui/custom_nodes
 
-RUN git clone https://github.com/city96/ComfyUI-GGUF
+RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF
 
 WORKDIR /app/comfyui
 
