@@ -15,10 +15,12 @@ USER comfyui
 WORKDIR /app
 
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git comfyui
-RUN git clone https://github.com/city96/ComfyUI-GGUF comfyui/custom_nodes/gguf
+
+WORKDIR /app/comfyui/custom_nodes
+
+RUN git clone https://github.com/city96/ComfyUI-GGUF
 
 WORKDIR /app/comfyui
-
 
 FROM minimal as nvidia
 
