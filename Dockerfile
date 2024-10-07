@@ -27,7 +27,7 @@ FROM minimal as nvidia
 RUN python3 -m venv venv && \
     . venv/bin/activate && \
     pip install torch torchvision torchaudio timm simpleeval accelerate --extra-index-url https://download.pytorch.org/whl/cu121 && \
-    pip install -r /ComfyUI/custom_nodex/ComfyUI-GGUF/requirements.txt && \
+    pip install -r /app/ComfyUI/custom_nodes/ComfyUI-GGUF/requirements.txt && \
     pip install -r requirements.txt
 
 VOLUME /app/comfyui/output
