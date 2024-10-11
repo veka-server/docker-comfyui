@@ -18,5 +18,7 @@ source venv/bin/activate
 python3 main.py --listen 0.0.0.0 --port 8188 --preview-method auto
 popd
 
+sed -i '/^exec fluxbox/i surf http://localhost:8188 &' /app/.fluxbox/startup
+
 # 5. Garder le conteneur en cours d'exécution
 wait
