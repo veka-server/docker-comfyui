@@ -3,8 +3,10 @@ FROM nvidia/cuda:12.1.1-base-ubuntu22.04 as minimal
 COPY entrypoint.sh /app/entrypoint.sh
 
 RUN apt update && \
-    apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev libglib2.0-0 libsm6 libxrender1 libxext6 libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 iptables xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils tigervnc-standalone-server tigervnc-common novnc websockify && \
-    rm -rf /var/lib/apt/lists/* && \
+    apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev \
+    libglib2.0-0 libsm6 libxrender1 libxext6 libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 iptables \
+    openbox xorg dbus-x11 x11-xserver-utils tigervnc-standalone-server \
+    tigervnc-common novnc websockify && \
     groupadd -g 1000 comfyui && \
     useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
     ln -s /app /home/comfyui && \
@@ -30,9 +32,9 @@ RUN python3 -m venv venv && \
     pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt && \
     pip install -r requirements.txt
 
-# Configuration du serveur VNC
+# Configuration du serveur VNC avec Openbox
 RUN mkdir -p /app/.vnc && \
-    echo "#!/bin/sh\nstartxfce4 &" > /app/.vnc/xstartup && \
+    echo "#!/bin/sh\nopenbox-session &" > /app/.vnc/xstartup && \
     chmod +x /app/.vnc/xstartup
 
 # Ajout de NoVNC et Websockify
