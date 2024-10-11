@@ -46,6 +46,8 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
     echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
     echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init
 
+RUN echo "[program:surf]\ncommand=/usr/bin/surf http://localhost:8188\n" >> /app/supervisor/supervisord.conf
+
 RUN mkdir ~/.fluxbox/  
 RUN bash -c 'echo "surf http://localhost:8188 &" >> ~/.fluxbox/startup'  
 
