@@ -9,7 +9,7 @@
 # 3. Lancer ComfyUI
 pushd /app/comfyui
 source venv/bin/activate
-python3 main.py "$@"
+python3 main.py --listen 0.0.0.0 --port 8188 --preview-method auto
 popd
 
 # 4. Garder le conteneur en cours d'exécution
