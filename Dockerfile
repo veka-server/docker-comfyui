@@ -2,8 +2,14 @@ FROM nvidia/cuda:12.1.1-base-ubuntu22.04 as minimal
 
 COPY entrypoint.sh /app/entrypoint.sh
 
+# Configuration pour éviter les interactions durant l'installation des paquets
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
-    apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev \
+    apt install -y tzdata && \
+    ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
+    dpkg-reconfigure --frontend noninteractive tzdata
+    
+RUN apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev \
     libglib2.0-0 libsm6 libxrender1 libxext6 libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 iptables \
     fluxbox xterm supervisor x11vnc xvfb novnc websockify && \
     groupadd -g 1000 comfyui && \
