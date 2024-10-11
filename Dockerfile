@@ -45,7 +45,7 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
     echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
     echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init && \
-    echo "surf http://localhost:8188 &" >> /app/.config/fluxbox/startup
+    echo "surf http://localhost:8188 &" >> /app/.config/fluxbox/startup && \
     echo "exec fluxbox" >> /app/.config/fluxbox/startup
     
 # Ports exposés pour ComfyUI et VNC/NoVNC
