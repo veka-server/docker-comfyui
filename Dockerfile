@@ -12,7 +12,7 @@ RUN apt update && \
 RUN apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev \
     libglib2.0-0 libsm6 libxrender1 libxext6 libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 iptables
 
-RUN apt install -y fluxbox xterm supervisor x11vnc xvfb novnc websockify surf
+RUN apt install -y openbox  xterm supervisor x11vnc xvfb novnc websockify surf
     
 RUN groupadd -g 1000 comfyui && \
     useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
@@ -37,8 +37,12 @@ RUN python3 -m venv venv && \
     pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt && \
     pip install -r requirements.txt
 
+# Ajout de la commande 'surf' au démarrage d'Openbox
+RUN mkdir -p /app/.config/openbox && \
+    echo "surf http://localhost:8188 &" > /app/.config/openbox/autostart
+    
 # Configuration de supervisord pour gérer Xvfb, x11vnc, et noVNC
-RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
+RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
     echo "[supervisord]\nnodaemon=true\n" > /app/supervisor/supervisord.conf && \
     echo "[program:xvfb]\ncommand=/usr/bin/Xvfb :1 -screen 0 1920x1080x24\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -nopw -forever -shared -rfbport 5900\n" >> /app/supervisor/supervisord.conf && \
@@ -47,11 +51,8 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
 
 #    echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
 
-RUN echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\nautostart=true\nautorestart=true\npriority=20\n" >> /app/supervisor/supervisord.conf && \
+RUN echo "[program:openbox]\ncommand=/usr/bin/openbox-session -display :1\nautostart=true\nautorestart=true\npriority=20\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:surf]\ncommand=/usr/bin/surf http://localhost:8188\nautostart=true\nautorestart=true\npriority=10\n" >> /app/supervisor/supervisord.conf
-
-RUN mkdir ~/.fluxbox/  
-RUN bash -c 'echo "surf http://localhost:8188 &" >> ~/.fluxbox/startup'  
 
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080
