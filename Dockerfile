@@ -37,9 +37,10 @@ RUN python3 -m venv venv && \
     pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt && \
     pip install -r requirements.txt
 
-# Ajout de la commande 'surf' au démarrage d'Openbox
+# Ajout de la commande 'surf' et 'xterm' au démarrage d'Openbox
 RUN mkdir -p /app/.config/openbox && \
-    echo "surf http://localhost:8188 &" > /app/.config/openbox/autostart
+    echo "xterm &" > /app/.config/openbox/autostart && \
+    echo "surf http://localhost:8188 &" >> /app/.config/openbox/autostart
     
 # Configuration de supervisord pour gérer Xvfb, x11vnc, et noVNC
 RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
