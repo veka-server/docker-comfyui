@@ -46,10 +46,8 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
     echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
     echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init
 
-RUN mkdir /app/.fluxbox && \
-    echo "surf http://localhost:8188 &" > /app/.fluxbox/startup && \
-    echo "exec fluxbox" >> /app/.fluxbox/startup
-
+RUN mkdir ~/.fluxbox/  
+RUN bash -c 'echo "surf http://localhost:8188 &" >> ~/.fluxbox/startup'  
 
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080
