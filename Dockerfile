@@ -44,13 +44,8 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
     echo "[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -nopw -forever -shared -rfbport 5900\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
-    echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init && \
-    chmod +x /app/entrypoint.sh
-
-# Configuration de Xvfb, Fluxbox, x11vnc et supervisord
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
+    echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init 
+    
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 8188 5901 6080
 
