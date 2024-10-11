@@ -48,7 +48,7 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
     echo "exec /usr/bin/firefox http://localhost:8188 &" >> /app/.config/fluxbox/init
     
 # Ports exposés pour ComfyUI et VNC/NoVNC
-EXPOSE 8188 5901 6080
+EXPOSE 6080
 
 VOLUME /app/comfyui/output
 VOLUME /app/comfyui/input
