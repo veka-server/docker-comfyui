@@ -44,8 +44,7 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
     echo "[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -nopw -forever -shared -rfbport 5900\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
-    echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init && \
-    echo "surf http://localhost:8188 &" >> /app/.config/fluxbox/startup && \
+    echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init
 
 RUN mkdir -p /app/.fluxbox && sed -i '/^exec fluxbox/i surf http://localhost:8188 &' /app/.fluxbox/startup
 
