@@ -29,8 +29,6 @@ RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF
 
 WORKDIR /app/comfyui
 
-FROM minimal as nvidia
-
 RUN python3 -m venv venv && \
     . venv/bin/activate && \
     pip install torch torchvision torchaudio timm simpleeval accelerate --extra-index-url https://download.pytorch.org/whl/cu121 && \
