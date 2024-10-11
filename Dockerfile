@@ -5,8 +5,7 @@ COPY entrypoint.sh /app/entrypoint.sh
 RUN apt update && \
     apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev \
     libglib2.0-0 libsm6 libxrender1 libxext6 libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 iptables \
-    openbox xorg dbus-x11 x11-xserver-utils tigervnc-standalone-server \
-    tigervnc-common novnc websockify && \
+    fluxbox xterm supervisor x11vnc xvfb novnc websockify && \
     groupadd -g 1000 comfyui && \
     useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
     ln -s /app /home/comfyui && \
@@ -32,13 +31,19 @@ RUN python3 -m venv venv && \
     pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt && \
     pip install -r requirements.txt
 
-# Configuration du serveur VNC avec Openbox
-RUN mkdir -p /app/.vnc && \
-    echo "#!/bin/sh\nopenbox-session &" > /app/.vnc/xstartup && \
-    chmod +x /app/.vnc/xstartup
+# Configuration de supervisord pour gérer Xvfb, x11vnc, et noVNC
+RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
+    echo "[supervisord]\nnodaemon=true\n" > /app/supervisor/supervisord.conf && \
+    echo "[program:xvfb]\ncommand=/usr/bin/Xvfb :1 -screen 0 1280x800x24\n" >> /app/supervisor/supervisord.conf && \
+    echo "[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -nopw -forever -shared -rfbport 5900\n" >> /app/supervisor/supervisord.conf && \
+    echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf && \
+    echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
+    echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init && \
+    chmod +x /app/entrypoint.sh
 
-# Ajout de NoVNC et Websockify
-RUN ln -s /usr/share/novnc/vnc_lite.html /app/novnc_index.html
+# Configuration de Xvfb, Fluxbox, x11vnc et supervisord
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 8188 5901 6080
@@ -63,4 +68,4 @@ VOLUME /app/comfyui/models/vae_approx
 
 ENTRYPOINT ["/app/entrypoint.sh", "--listen", "0.0.0.0", "--port", "8188", "--preview-method", "auto"]
 
-CMD ["/bin/bash", "-c", "vncserver :1 -geometry 1280x800 -depth 24 && websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5901"]
+CMD ["/usr/bin/supervisord", "-c", "/app/supervisor/supervisord.conf"]
