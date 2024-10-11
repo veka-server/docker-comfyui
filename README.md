@@ -12,12 +12,12 @@ docker build -t comfyui https://github.com/veka-server/docker-comfyui.git
 
 Basic example:
 ```
-docker run --gpus all --restart unless-stopped -p 8188:8188 --name comfyui -d comfyui
+docker run --gpus all --restart unless-stopped -p 6080:6080 --name comfyui -d comfyui
 ```
 
 Use SSL/TLS:
 ```
-docker run --gpus all --restart unless-stopped -p 8188:8188 \
+docker run --gpus all --restart unless-stopped -p 6080:6080 \
   -v /my/key.pem:/app/key.pem \
   -v /my/cert.pem:/app/cert.pem \
   --name comfyui -d comfyui --tls-keyfile /app/key.pem --tls-certfile /app/cert.pem
@@ -34,8 +34,13 @@ We will simply show the basic procedure here:
 docker run \
 --restart unless-stopped \
 --gpus all \
--p 8188:8188  \
+-p 6080:6080  \
+-e VNC_PASSWORD="mon_mot_de_passe" \
 -v /home/veka/models/checkpoints:/app/comfyui/models/checkpoints \
+-v /home/veka/models/clip:/app/comfyui/models/clip \
+-v /home/veka/models/clip_vision:/app/comfyui/models/clip_vision \
+-v /home/veka/models/unet:/app/comfyui/models/unet \
+-v /home/veka/models/vae:/app/comfyui/models/vae \
 -v /home/veka/models/output:/app/comfyui/output \
 --name comfyui \
 -d comfyui 
