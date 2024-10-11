@@ -67,6 +67,6 @@ VOLUME /app/comfyui/models/upscale_models
 VOLUME /app/comfyui/models/vae
 VOLUME /app/comfyui/models/vae_approx
 
-ENTRYPOINT ["/app/entrypoint.sh", "--listen", "0.0.0.0", "--port", "8188", "--preview-method", "auto"]
+ENTRYPOINT ["/app/entrypoint.sh"]
 
-CMD ["/usr/bin/supervisord", "-c", "/app/supervisor/supervisord.conf"]
+# CMD ["/usr/bin/supervisord", "-c", "/app/supervisor/supervisord.conf"]
