@@ -10,7 +10,7 @@ python3 main.py "$@"
 popd
 
 # 2. Démarrer supervisord pour gérer Xvfb, x11vnc, noVNC, et Fluxbox
-/usr/bin/supervisord -c /app/supervisor/supervisord.conf &
+# /usr/bin/supervisord -c /app/supervisor/supervisord.conf &
 
 # 4. Garder le conteneur en cours d'exécution
-wait
+# wait
