@@ -12,7 +12,7 @@ RUN apt update && \
 RUN apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev \
     libglib2.0-0 libsm6 libxrender1 libxext6 libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 iptables
 
-RUN apt install -y fluxbox xterm supervisor x11vnc xvfb novnc websockify luakit 
+RUN apt install -y fluxbox xterm supervisor x11vnc xvfb novnc websockify firefox
     
 RUN groupadd -g 1000 comfyui && \
     useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
@@ -40,7 +40,7 @@ RUN python3 -m venv venv && \
 # Configuration de supervisord pour gérer Xvfb, x11vnc, et noVNC
 RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
     echo "[supervisord]\nnodaemon=true\n" > /app/supervisor/supervisord.conf && \
-    echo "[program:xvfb]\ncommand=/usr/bin/Xvfb :1 -screen 0 1280x800x24\n" >> /app/supervisor/supervisord.conf && \
+    echo "[program:xvfb]\ncommand=/usr/bin/Xvfb :1 -screen 0 1920x1080x24\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -nopw -forever -shared -rfbport 5900\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
@@ -68,5 +68,3 @@ VOLUME /app/comfyui/models/vae
 VOLUME /app/comfyui/models/vae_approx
 
 ENTRYPOINT ["/app/entrypoint.sh"]
-
-# CMD ["/usr/bin/supervisord", "-c", "/app/supervisor/supervisord.conf"]
