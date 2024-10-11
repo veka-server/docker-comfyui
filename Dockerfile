@@ -46,7 +46,7 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/fluxbox && \
     echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
     echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init
 
-RUN mkdir /app/.fluxbox &&
+RUN mkdir /app/.fluxbox && \
     echo "surf http://localhost:8188 &" > /app/.fluxbox/startup && \
     echo "exec fluxbox" >> /app/.fluxbox/startup
 
