@@ -46,9 +46,14 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
     echo "[program:fluxbox]\ncommand=/usr/bin/startfluxbox\nautostart=true\nautorestart=true\nenvironment=DISPLAY=:1\n" >> /app/supervisor/supervisord.conf
 
 # Créer le fichier autostart pour surf dans Fluxbox
-RUN mkdir -p /app/.config/fluxbox && \
-    echo "surf http://localhost:8188 &" > /app/.config/fluxbox/startup && \
-    echo "exec fluxbox" >> /app/.config/fluxbox/startup
+RUN mkdir -p /app/.fluxbox && \
+    echo "surf http://localhost:8188 &" > /app/.fluxbox/startup && \
+    echo "exec fluxbox" >> /app/.fluxbox/startup
+    
+# Créer le fichier autostart pour surf dans Fluxbox
+RUN echo "[begin] (menu)" > /app/.config/fluxbox/menu && \
+    echo "[exec] (comfyui) {surf http://localhost:8188}" >> /app/.config/fluxbox/menu && \
+    echo "[end]" >> /app/.config/fluxbox/menu
     
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080
