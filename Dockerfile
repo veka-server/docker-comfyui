@@ -12,7 +12,7 @@ RUN apt update && \
 RUN apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev \
     libglib2.0-0 libsm6 libxrender1 libxext6 libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 iptables
 
-RUN apt install -y fluxbox nano xterm supervisor x11vnc xvfb novnc websockify surf
+RUN apt install -y fluxbox nano xterm supervisor x11vnc xvfb novnc websockify surf wmctrl
    
 RUN groupadd -g 1000 comfyui && \
     useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
@@ -47,9 +47,10 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
 
 # Créer le fichier autostart pour surf dans Fluxbox
 RUN mkdir -p /app/.fluxbox && \
-    echo "surf http://localhost:8188 &" > /app/.fluxbox/startup
+    echo "surf http://localhost:8188 &" > /app/.fluxbox/startup && \
 #    echo "exec fluxbox" >> /app/.fluxbox/startup
-    
+    echo "sleep 2 && wmctrl -r surf -b add,maximized_vert,maximized_horz &" >> /app/.fluxbox/startup
+
 # Créer le fichier autostart pour surf dans Fluxbox
 RUN echo "[begin] (menu)" > /app/.fluxbox/menu && \
     echo "[exec] (comfyui) {surf http://localhost:8188}" >> /app/.fluxbox/menu && \
