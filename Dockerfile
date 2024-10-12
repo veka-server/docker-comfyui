@@ -42,8 +42,8 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
     echo "[supervisord]\nnodaemon=true\n" > /app/supervisor/supervisord.conf && \
     echo "[program:xvfb]\ncommand=/usr/bin/Xvfb :1 -screen 0 1920x1080x24\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -nopw -forever -shared -rfbport 5900\n" >> /app/supervisor/supervisord.conf && \
-    echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf && \
-    echo "[program:fluxbox]\ncommand=/usr/bin/startfluxbox\nautostart=true\nautorestart=true\nenvironment=DISPLAY=:1\n" >> /app/supervisor/supervisord.conf
+    echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf 
+#    echo "[program:fluxbox]\ncommand=/usr/bin/startfluxbox\nautostart=true\nautorestart=true\nenvironment=DISPLAY=:1\n" >> /app/supervisor/supervisord.conf
 
 # Créer le fichier autostart pour surf dans Fluxbox
 RUN mkdir -p /app/.fluxbox && \
@@ -51,9 +51,9 @@ RUN mkdir -p /app/.fluxbox && \
     echo "exec fluxbox" >> /app/.fluxbox/startup
 
 # Créer le fichier menu pour surf dans Fluxbox
-#RUN echo "[begin] (menu)" > /app/.fluxbox/menu && \
-#    echo "[exec] (comfyui) {surf -F http://localhost:8188}" >> /app/.fluxbox/menu && \
-#    echo "[end]" >> /app/.fluxbox/menu
+RUN echo "[begin] (menu)" > /app/.fluxbox/menu && \
+    echo "[exec] (comfyui) {surf -F http://localhost:8188}" >> /app/.fluxbox/menu && \
+    echo "[end]" >> /app/.fluxbox/menu
         
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080
