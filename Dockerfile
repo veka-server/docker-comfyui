@@ -56,7 +56,7 @@ RUN echo "[begin] (menu)" > /app/.fluxbox/menu && \
     echo "[end]" >> /app/.fluxbox/menu
         
 # Ports exposés pour ComfyUI et VNC/NoVNC
-EXPOSE 6080
+EXPOSE 6080 8188
 
 VOLUME /app/comfyui/output
 VOLUME /app/comfyui/input
