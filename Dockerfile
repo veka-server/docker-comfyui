@@ -46,7 +46,8 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
     echo "[program:lxde]\ncommand=/usr/bin/startlxde\nautostart=true\nautorestart=true\nenvironment=DISPLAY=:1\n" >> /app/supervisor/supervisord.conf
 
 # Ajouter un fichier de démarrage pour LXDE avec surf
-RUN echo '@surf suckless.org' >> /home/dockeruser/.config/lxsession/LXDE/autostart
+RUN echo '@surf suckless.org' >> /home/comfyui/.config/lxsession/LXDE/autostart
+RUN echo 'surf suckless.org' >> /home/comfyui/.config/lxsession/LXDE/autostart
 
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080
