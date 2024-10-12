@@ -12,13 +12,8 @@ RUN apt update && \
 RUN apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev \
     libglib2.0-0 libsm6 libxrender1 libxext6 libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 iptables
 
-RUN apt install -y xterm supervisor x11vnc xvfb novnc websockify surf
-
-RUN git clone https://git.suckless.org/dwm && \
-    cd dwm && \
-    make && \
-    make install
-    
+RUN apt install -y dwm xterm supervisor x11vnc xvfb novnc websockify surf
+   
 RUN groupadd -g 1000 comfyui && \
     useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
     ln -s /app /home/comfyui && \
