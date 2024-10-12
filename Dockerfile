@@ -12,7 +12,12 @@ RUN apt update && \
 RUN apt install -y python3 python3-pip python3-venv git wget libgl1-mesa-dev \
     libglib2.0-0 libsm6 libxrender1 libxext6 libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 iptables
 
-RUN apt install -y openbox  xterm supervisor x11vnc xvfb novnc websockify surf
+RUN apt install -y xterm supervisor x11vnc xvfb novnc websockify surf
+
+RUN git clone https://git.suckless.org/dwm && \
+    cd dwm && \
+    make && \
+    make install
     
 RUN groupadd -g 1000 comfyui && \
     useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
@@ -36,24 +41,18 @@ RUN python3 -m venv venv && \
     pip install torch torchvision torchaudio timm simpleeval accelerate --extra-index-url https://download.pytorch.org/whl/cu121 && \
     pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt && \
     pip install -r requirements.txt
-
-# Ajout de la commande 'surf' et 'xterm' au démarrage d'Openbox
-RUN mkdir -p /app/.config/openbox && \
-    echo "xterm &" > /app/.config/openbox/autostart && \
-    echo "surf http://localhost:8188 &" >> /app/.config/openbox/autostart
-    
+  
 # Configuration de supervisord pour gérer Xvfb, x11vnc, et noVNC
 RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
     echo "[supervisord]\nnodaemon=true\n" > /app/supervisor/supervisord.conf && \
     echo "[program:xvfb]\ncommand=/usr/bin/Xvfb :1 -screen 0 1920x1080x24\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -nopw -forever -shared -rfbport 5900\n" >> /app/supervisor/supervisord.conf && \
-    echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf
-#    echo "session.screen0.toolbar.visible: false" > /app/.config/fluxbox/init
+    echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf && \
+    echo "[program:dwm]\ncommand=/usr/bin/dwm -display :1\nenvironment=DISPLAY=:1\nstartretries=0\nautostart=true\nautorestart=true\n" >> /app/supervisor/supervisord.conf
 
-#    echo "[program:fluxbox]\ncommand=/usr/bin/fluxbox -display :1\n" >> /app/supervisor/supervisord.conf && \
-
-RUN echo "[program:openbox]\ncommand=/usr/bin/openbox-session -display :1\nautostart=true\nautorestart=true\npriority=20\n" >> /app/supervisor/supervisord.conf && \
-    echo "[program:surf]\ncommand=/usr/bin/surf http://localhost:8188\nautostart=true\nautorestart=true\npriority=10\n" >> /app/supervisor/supervisord.conf
+# Ajouter un fichier de démarrage pour dwm avec surf
+RUN echo "exec surf suckless.org &" >> /home/comfyui/.xinitrc && \
+    echo "exec dwm" >> /home/comfyui/.xinitrc
 
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080
