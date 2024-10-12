@@ -47,12 +47,12 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
 
 # Créer le fichier autostart pour surf dans Fluxbox
 RUN mkdir -p /app/.fluxbox && \
-    echo "pkill surf; surf -f http://localhost:8188 &" > /app/.fluxbox/startup && \
+    echo "pkill surf; surf -F http://localhost:8188 &" > /app/.fluxbox/startup && \
     echo "exec fluxbox" >> /app/.fluxbox/startup
 
 # Créer le fichier menu pour surf dans Fluxbox
 RUN echo "[begin] (menu)" > /app/.fluxbox/menu && \
-    echo "[exec] (comfyui) {surf -f http://localhost:8188}" >> /app/.fluxbox/menu && \
+    echo "[exec] (comfyui) {surf -F http://localhost:8188}" >> /app/.fluxbox/menu && \
     echo "[exec] (xterm) {xterm}" >> /app/.fluxbox/menu && \
     echo "[end]" >> /app/.fluxbox/menu
         
