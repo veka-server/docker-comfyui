@@ -51,9 +51,9 @@ RUN mkdir -p /app/.fluxbox && \
     echo "exec fluxbox" >> /app/.fluxbox/startup
     
 # Créer le fichier autostart pour surf dans Fluxbox
-RUN echo "[begin] (menu)" > /app/.config/fluxbox/menu && \
-    echo "[exec] (comfyui) {surf http://localhost:8188}" >> /app/.config/fluxbox/menu && \
-    echo "[end]" >> /app/.config/fluxbox/menu
+RUN echo "[begin] (menu)" > /app/.fluxbox/menu && \
+    echo "[exec] (comfyui) {surf http://localhost:8188}" >> /app/.fluxbox/menu && \
+    echo "[end]" >> /app/.fluxbox/menu
     
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080
