@@ -53,15 +53,8 @@ RUN mkdir -p /app/.fluxbox && \
 
 # Créer le fichier menu pour surf dans Fluxbox
 RUN echo "[begin] (menu)" > /app/.fluxbox/menu && \
-    echo "[exec] (comfyui) {surf http://localhost:8188}" >> /app/.fluxbox/menu && \
+    echo "[exec] (comfyui) {surf -F http://localhost:8188}" >> /app/.fluxbox/menu && \
     echo "[end]" >> /app/.fluxbox/menu
-
-# Créer le fichier apps pour surf dans Fluxbox
-RUN echo "[group]" > /app/.fluxbox/apps && \
-    echo "[app] (name=surf) (class=surf)" >> /app/.fluxbox/apps && \
-    echo "[maximized] {yes}" >> /app/.fluxbox/apps && \
-    echo "[end]" >> /app/.fluxbox/apps
-
         
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080
