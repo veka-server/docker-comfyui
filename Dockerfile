@@ -47,9 +47,8 @@ RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
 
 # Créer le fichier autostart pour surf dans Fluxbox
 RUN mkdir -p /app/.fluxbox && \
-    echo "surf http://localhost:8188 &" > /app/.fluxbox/startup && \
-    echo "sleep 2 && wmctrl -r surf -b add,maximized_vert,maximized_horz &" >> /app/.fluxbox/startup && \
-    echo "exec fluxbox" >> /app/.fluxbox/startup
+    echo "surf -F http://localhost:8188 &" > /app/.fluxbox/startup
+#    echo "exec fluxbox" >> /app/.fluxbox/startup
 
 # Créer le fichier menu pour surf dans Fluxbox
 RUN echo "[begin] (menu)" > /app/.fluxbox/menu && \
