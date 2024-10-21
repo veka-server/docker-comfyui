@@ -7,7 +7,7 @@ For detailed command-line flags, see [Official instructions](https://github.com/
 
 Build image:
 ```
-docker build -t comfyui https://github.com/veka-server/docker-comfyui.git
+docker build -t comfyui https://github.com/veka-server/docker-comfyui.git#main
 ```
 
 Basic example:
