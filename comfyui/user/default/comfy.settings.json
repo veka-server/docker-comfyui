@@ -1,0 +1,9 @@
+{
+    "Comfy.PromptFilename": false,
+    "Comfy.DevMode": true,
+    "Comfy.LinkRenderMode": 2,
+    "Comfy.UseNewMenu": "Top",
+    "Comfy.Sidebar.Size": "small",
+    "Comfy.ColorPalette": "dark",
+    "Comfy.NodeLibrary.Bookmarks": []
+}
