@@ -66,6 +66,8 @@ COPY comfyui/user/default/comfy.settings.json /app/comfyui/user/default/comfy.se
 USER root
 RUN chown -R comfyui:comfyui /app
 
+USER comfyui
+
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080 8188
 
