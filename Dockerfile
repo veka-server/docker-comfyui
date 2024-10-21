@@ -41,7 +41,7 @@ RUN python3 -m venv venv && \
 RUN mkdir -p /app/supervisor /app/.vnc /app/.config/openbox && \
     echo "[supervisord]\nnodaemon=true\n" > /app/supervisor/supervisord.conf && \
     echo "[program:xvfb]\ncommand=/usr/bin/Xvfb :1 -screen 0 1920x1080x24\n" >> /app/supervisor/supervisord.conf && \
-    echo "[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -passwd $VNC_PASSWORD -forever -shared -rfbport 5900\n" >> /app/supervisor/supervisord.conf && \
+    echo "[program:x11vnc]\ncommand=/usr/bin/x11vnc -display :1 -passwd toto -forever -shared -rfbport 5900\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:novnc]\ncommand=/usr/bin/websockify --web=/usr/share/novnc/ --wrap-mode=ignore 6080 localhost:5900\n" >> /app/supervisor/supervisord.conf && \
     echo "[program:fluxbox]\ncommand=/usr/bin/startfluxbox\nautostart=true\nautorestart=true\nenvironment=DISPLAY=:1\n" >> /app/supervisor/supervisord.conf
 
