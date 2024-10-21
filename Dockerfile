@@ -63,6 +63,7 @@ COPY workflow /app/workflow
 # Copier la config comfyui
 COPY comfyui/user/default/comfy.settings.json /app/comfyui/user/default/comfy.settings.json
 
+USER root
 RUN chown -R comfyui:comfyui /app
 
 # Ports exposés pour ComfyUI et VNC/NoVNC
