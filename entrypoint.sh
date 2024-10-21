@@ -6,9 +6,6 @@ if [ -z "$VNC_PASSWORD" ]; then
     VNC_PASSWORD="default_password"  # Mot de passe par défaut
 fi
 
-# 2. Configurer le mot de passe pour x11vnc
-echo "$VNC_PASSWORD" | x11vnc -storepasswd - /app/.vnc/passwd
-
 # 3. Démarrer supervisord pour gérer Xvfb, x11vnc, noVNC, et Fluxbox
 /usr/bin/supervisord -c /app/supervisor/supervisord.conf &
 
