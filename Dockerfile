@@ -60,6 +60,10 @@ RUN echo "[begin] (menu)" > /app/.fluxbox/menu && \
 # Copier le dossier workflow dans le conteneur
 COPY workflow /app/workflow
 
+# Copier la config comfyui
+COPY comfyui/user/default/comfy.settings.json /app/comfyui/user/default/comfy.settings.json
+
+
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080 8188
 
