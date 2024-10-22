@@ -1,12 +1,8 @@
 # Utiliser l'image officielle PHP avec Apache
-FROM php:8.1-apache
+FROM php:8.3-apache
 
-# Mettre à jour les paquets et installer SQLite 3 ainsi que les dépendances nécessaires
-RUN apt-get update && apt-get install -y \
-    libsqlite3-dev \
-    sqlite3 \
-    pkg-config \
-    && docker-php-ext-install pdo pdo_sqlite
+RUN docker-php-ext-install sqlite
+RUN docker-php-ext-install pdo_sqlite
 
 # Activer le module de réécriture Apache (utile pour .htaccess si nécessaire)
 RUN a2enmod rewrite
