@@ -41,6 +41,9 @@ docker run \
 -v /home/veka/models/clip_vision:/app/comfyui/models/clip_vision \
 -v /home/veka/models/unet:/app/comfyui/models/unet \
 -v /home/veka/models/vae:/app/comfyui/models/vae \
+-v /home/veka/models/vae:/app/comfyui/models/loras \
+-v /home/veka/models/vae:/app/comfyui/models/upscale_models \
+-v /home/veka/models/vae:/app/comfyui/models/controlnet \
 -v /home/veka/models/output:/app/comfyui/output \
 --name comfyui \
 -d comfyui 
