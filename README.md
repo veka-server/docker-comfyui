@@ -36,7 +36,6 @@ docker run \
 --gpus all \
 -p 6080:6080  \
 -p 8188:8188  \
---net reseaux_sans_internet \
 -e VNC_PASSWORD="mon_mot_de_passe" \
 -v /home/veka/models/checkpoints:/app/comfyui/models/checkpoints \
 -v /home/veka/models/clip:/app/comfyui/models/clip \
