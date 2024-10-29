@@ -21,7 +21,7 @@ chmod 600 /app/.vnc/passwd
 # 4. Lancer ComfyUI
 pushd /app/comfyui
 source venv/bin/activate
-python3 main.py --listen 0.0.0.0 --port 8188 --lowvram --disable-smart-memory
+python3 main.py --listen 0.0.0.0 --port 8188 --lowvram --disable-smart-memory --reserve-vram 5
 popd
 
 # 5. Garder le conteneur en cours d'exécution
