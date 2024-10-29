@@ -24,9 +24,7 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git comfyui
 
 WORKDIR /app/comfyui/custom_nodes
 
-RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF ; \
-    git clone https://github.com/SeanScripts/ComfyUI-Unload-Model.git; \
-    git clone https://github.com/LarryJane491/ComfyUI-ModelUnloader.git ;
+RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF ; 
 
 WORKDIR /app/comfyui
 
