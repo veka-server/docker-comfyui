@@ -17,7 +17,7 @@ RUN apt update && \
     chown -R comfyui:comfyui /app && \
     chmod +x /app/entrypoint.sh
 
-USER comfyui
+#USER comfyui
 WORKDIR /app
 
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git comfyui
