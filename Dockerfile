@@ -24,8 +24,6 @@ RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF ;
 
 RUN git clone https://github.com/welltop-cn/ComfyUI-TeaCache.git ComfyUI-TeaCache ; 
 
-RUN git clone https://github.com/chengzeyi/Comfy-WaveSpeed.git ;
-
 WORKDIR /app/comfyui
 
 RUN python3 -m venv venv && \
