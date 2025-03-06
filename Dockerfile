@@ -26,6 +26,8 @@ RUN git clone https://github.com/kijai/ComfyUI-HunyuanVideoWrapper ComfyUI-Hunyu
 
 RUN git clone https://github.com/welltop-cn/ComfyUI-TeaCache.git ComfyUI-TeaCache ; 
 
+RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU ; 
+
 WORKDIR /app/comfyui
 
 RUN python3 -m venv venv && \
