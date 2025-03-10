@@ -20,7 +20,7 @@ RUN python3 -m venv venv && \
     . venv/bin/activate && \
     pip install torch torchvision torchaudio timm simpleeval accelerate --extra-index-url https://download.pytorch.org/whl/cu121 ;
     
-RUN git clone --depth 1 --branch v0.3.26 https://github.com/comfyanonymous/ComfyUI.git
+RUN git clone --depth 1 --branch v0.3.26 https://github.com/comfyanonymous/ComfyUI.git comfyui
     
 WORKDIR /app/comfyui/custom_nodes
 
