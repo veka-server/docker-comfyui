@@ -32,7 +32,7 @@ WORKDIR /app/comfyui
 
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt && \
     pip install -r /app/comfyui/custom_nodes/ComfyUI-HunyuanVideoWrapper/requirements.txt && \
-    pip install -r requirements.txt ; 
+    pip install -r /app/comfyui/requirements.txt ; 
 
 WORKDIR /app/comfyui/custom_nodes
 
