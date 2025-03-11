@@ -39,6 +39,8 @@ RUN git clone https://github.com/welltop-cn/ComfyUI-TeaCache.git ComfyUI-TeaCach
 
 RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU ; 
 
+RUN git clone https://github.com/liusida/ComfyUI-Debug.git ComfyUI-Debug ;
+
 WORKDIR /app/comfyui
 
 # Copier le dossier workflow dans le conteneur
