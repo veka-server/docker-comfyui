@@ -21,24 +21,23 @@ RUN python3 -m venv venv && \
     pip install torch torchvision torchaudio timm simpleeval accelerate --extra-index-url https://download.pytorch.org/whl/cu121 ;
     
 RUN git clone --depth 1 --branch v0.3.26 https://github.com/comfyanonymous/ComfyUI.git comfyui
+
+RUN pip install -r /app/comfyui/requirements.txt ; 
     
 WORKDIR /app/comfyui/custom_nodes
 
 RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF ; 
+RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt ;
 
 RUN git clone https://github.com/kijai/ComfyUI-HunyuanVideoWrapper ComfyUI-HunyuanVideoWrapper ; 
+RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-HunyuanVideoWrapper/requirements.txt ;
 
-WORKDIR /app/comfyui
-
-RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt && \
-    pip install -r /app/comfyui/custom_nodes/ComfyUI-HunyuanVideoWrapper/requirements.txt && \
-    pip install -r /app/comfyui/requirements.txt ; 
-
-WORKDIR /app/comfyui/custom_nodes
+RUN git clone https://github.com/stavsap/comfyui-ollama.git comfyui-ollama ;
+RUN pip install -r /app/comfyui/custom_nodes/comfyui-ollama/requirements.txt ;   
 
 RUN git clone https://github.com/welltop-cn/ComfyUI-TeaCache.git ComfyUI-TeaCache ; 
+
 RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU ; 
-RUN git clone https://github.com/stavsap/comfyui-ollama.git comfyui-ollama ;
 
 WORKDIR /app/comfyui
 
