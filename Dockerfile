@@ -38,6 +38,7 @@ WORKDIR /app/comfyui/custom_nodes
 
 RUN git clone https://github.com/welltop-cn/ComfyUI-TeaCache.git ComfyUI-TeaCache ; 
 RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU ; 
+RUN git clone https://github.com/stavsap/comfyui-ollama.git comfyui-ollama ;
 
 WORKDIR /app/comfyui
 
