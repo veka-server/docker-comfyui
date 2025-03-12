@@ -44,6 +44,9 @@ RUN git clone https://github.com/fairy-root/ComfyUI-Show-Text.git ComfyUI-Show-T
 RUN git clone https://github.com/larsupb/comfyui-joycaption.git comfyui-joycaption ;
 RUN pip install -r /app/comfyui/custom_nodes/comfyui-joycaption/requirements.txt ;   
 
+RUN git clone https://github.com/StartHua/Comfyui_CXH_joy_caption.git Comfyui_CXH_joy_caption ;
+RUN pip install -r /app/comfyui/custom_nodes/Comfyui_CXH_joy_caption/requirements.txt ;   
+
 WORKDIR /app/comfyui
 
 # Copier le dossier workflow dans le conteneur
