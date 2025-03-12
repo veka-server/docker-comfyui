@@ -41,6 +41,9 @@ RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU
 
 RUN git clone https://github.com/fairy-root/ComfyUI-Show-Text.git ComfyUI-Show-Text ;
 
+RUN git clone https://github.com/larsupb/comfyui-joycaption.git comfyui-joycaption ;
+RUN pip install -r /app/comfyui/custom_nodes/comfyui-joycaption/requirements.txt ;   
+
 WORKDIR /app/comfyui
 
 # Copier le dossier workflow dans le conteneur
