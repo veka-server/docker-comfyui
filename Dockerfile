@@ -64,6 +64,7 @@ COPY comfyui/user/default/comfy.settings.json /app/comfyui/user/default/comfy.se
 EXPOSE 6080 8188
 
 RUN mkdir -p /app/comfyui/models/Joy_caption_two
+RUN mkdir -p /app/comfyui/models/LLM
 
 VOLUME /app/comfyui/output
 VOLUME /app/comfyui/input
