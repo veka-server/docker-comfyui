@@ -63,6 +63,8 @@ COPY comfyui/user/default/comfy.settings.json /app/comfyui/user/default/comfy.se
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080 8188
 
+RUN mkdir -p /app/comfyui/models/Joy_caption_two
+
 VOLUME /app/comfyui/output
 VOLUME /app/comfyui/input
 VOLUME /app/comfyui/models/checkpoints
