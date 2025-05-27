@@ -47,6 +47,9 @@ RUN pip install -r /app/comfyui/custom_nodes/comfyui-joycaption/requirements.txt
 RUN git clone https://github.com/veka-server/ComfyUI_SLK_joy_caption_two.git ComfyUI_SLK_joy_caption_two ;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI_SLK_joy_caption_two/requirements.txt ;   
 
+RUN git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git comfyui_controlnet_aux ;
+RUN pip install -r /app/comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt ;   
+
 WORKDIR /app/comfyui
 
 # Copier le dossier workflow dans le conteneur
