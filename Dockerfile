@@ -50,6 +50,9 @@ RUN pip install -r /app/comfyui/custom_nodes/ComfyUI_SLK_joy_caption_two/require
 RUN git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git comfyui_controlnet_aux ;
 RUN pip install -r /app/comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt ;   
 
+RUN git clone https://github.com/neverbiasu/ComfyUI-BAGEL.git ComfyUI-BAGEL ;
+RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-BAGEL/requirements.txt ;   
+
 WORKDIR /app/comfyui
 
 # Copier le dossier workflow dans le conteneur
