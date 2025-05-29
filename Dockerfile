@@ -1,5 +1,5 @@
 #FROM nvidia/cuda:12.1.1-base-ubuntu22.04
-FROM nvidia/cuda:12.1.1-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:12.1.1-devel-ubuntu22.04
 
 COPY entrypoint.sh /app/entrypoint.sh
 
