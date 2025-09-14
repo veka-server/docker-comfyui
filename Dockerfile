@@ -1,10 +1,19 @@
-FROM ghcr.io/veka-server/docker-ubuntu-cuda-pytorch:12.1.1
+#FROM ghcr.io/veka-server/docker-ubuntu-cuda-pytorch:12.1.1
+FROM pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
 
 COPY entrypoint.sh /app/entrypoint.sh
 
 # Configuration pour éviter les interactions durant l'installation des paquets
 ENV DEBIAN_FRONTEND=noninteractive
-RUN groupadd -g 1000 comfyui && \
+
+# Installer uniquement les paquets nécessaires et nettoyer le cache APT
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        git wget \
+        libgl1-mesa-dev libglib2.0-0 libsm6 libxrender1 libxext6 \
+        libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 && \
+    rm -rf /var/lib/apt/lists/* && \
+    groupadd -g 1000 comfyui && \
     useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
     ln -s /app /home/comfyui && \
     chown -R comfyui:comfyui /app && \
