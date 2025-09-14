@@ -3,6 +3,18 @@ The most powerful and modular stable diffusion GUI and backend. This repository 
 
 For detailed command-line flags, see [Official instructions](https://github.com/comfyanonymous/ComfyUI).
 
+![Docker Pulls](https://img.shields.io/github/v/release/veka-server/docker-comfyui?label=GHCR)
+
+![Build Docker](https://github.com/veka-server/docker-comfyui/actions/workflows/docker-release.yml/badge.svg)
+
+```bash
+$ docker pull ghcr.io/veka-server/docker-comfyui:12.1.1
+```
+
+Liste des images :
+https://github.com/users/veka-server/packages/container/package/docker-comfyui
+
+
 ## Usage
 
 Build image:
