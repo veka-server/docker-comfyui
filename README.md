@@ -8,7 +8,7 @@ For detailed command-line flags, see [Official instructions](https://github.com/
 ![Build Docker](https://github.com/veka-server/docker-comfyui/actions/workflows/docker-release.yml/badge.svg)
 
 ```bash
-$ docker pull ghcr.io/veka-server/docker-comfyui:12.1.1
+$ docker pull ghcr.io/veka-server/docker-comfyui:latest
 ```
 
 Liste des images :
