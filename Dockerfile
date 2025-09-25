@@ -48,8 +48,8 @@ RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU
 RUN git clone https://github.com/veka-server/ComfyUI_SLK_joy_caption_two.git ComfyUI_SLK_joy_caption_two ;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI_SLK_joy_caption_two/requirements.txt ;   
 
-RUN git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git comfyui_controlnet_aux ;
-RUN pip install -r /app/comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt ;   
+#RUN git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git comfyui_controlnet_aux ;
+#RUN pip install -r /app/comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt ;   
 
 # RUN git clone https://github.com/neverbiasu/ComfyUI-BAGEL.git ComfyUI-BAGEL ;
 # RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-BAGEL/requirements.txt ;   
