@@ -54,6 +54,9 @@ RUN pip install -r /app/comfyui/custom_nodes/comfyui_controlnet_aux/requirements
 # RUN git clone https://github.com/neverbiasu/ComfyUI-BAGEL.git ComfyUI-BAGEL ;
 # RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-BAGEL/requirements.txt ;   
 
+RUN git clone https://github.com/wildminder/ComfyUI-VibeVoice.git;
+RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-VibeVoice/requirements.txt ;   
+
 WORKDIR /app/comfyui
 
 # Copier le dossier workflow dans le conteneur
