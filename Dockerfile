@@ -30,17 +30,17 @@ WORKDIR /app/comfyui/custom_nodes
 RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF ; 
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt ;
 
-RUN git clone https://github.com/kijai/ComfyUI-HunyuanVideoWrapper ComfyUI-HunyuanVideoWrapper ; 
-RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-HunyuanVideoWrapper/requirements.txt ;
+#RUN git clone https://github.com/kijai/ComfyUI-HunyuanVideoWrapper ComfyUI-HunyuanVideoWrapper ; 
+#RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-HunyuanVideoWrapper/requirements.txt ;
 
 RUN git clone https://github.com/stavsap/comfyui-ollama.git comfyui-ollama ;
 RUN pip install -r /app/comfyui/custom_nodes/comfyui-ollama/requirements.txt ;   
 
-RUN git clone https://github.com/welltop-cn/ComfyUI-TeaCache.git ComfyUI-TeaCache ; 
+#RUN git clone https://github.com/welltop-cn/ComfyUI-TeaCache.git ComfyUI-TeaCache ; 
 
 RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU ; 
 
-RUN git clone https://github.com/fairy-root/ComfyUI-Show-Text.git ComfyUI-Show-Text ;
+#RUN git clone https://github.com/fairy-root/ComfyUI-Show-Text.git ComfyUI-Show-Text ;
 
 #RUN git clone https://github.com/larsupb/comfyui-joycaption.git comfyui-joycaption ;
 #RUN pip install -r /app/comfyui/custom_nodes/comfyui-joycaption/requirements.txt ;   
