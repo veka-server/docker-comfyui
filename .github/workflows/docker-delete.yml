@@ -1,0 +1,36 @@
+name: Delete Docker Image on Branch Removal
+
+on:
+  delete:
+    branches-ignore:
+      - main
+      - master
+    branches:
+      - '*'   # Se déclenche sur suppression de n’importe quelle branche
+
+jobs:
+  delete-image:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Extract branch name
+      run: |
+        BRANCH_NAME=$(echo "${GITHUB_REF##*/}" | tr '/' '-')
+        echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+    - name: Delete Docker image tag from GHCR
+      run: |
+        echo "Deleting tag $BRANCH_NAME from GHCR..."
+
+        # Supprime le tag via l'API GHCR
+        curl -X DELETE \
+          -H "Authorization: Bearer ${{ secrets.GHCR_PAT }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          "https://api.github.com/users/${{ github.repository_owner }}/packages/container/docker-comfyui/versions" \
+          | jq -r '.[] | select(.metadata.container.tags[] == "'"$BRANCH_NAME"'") | .id' | while read id; do
+              echo "Deleting version ID: $id"
+              curl -X DELETE \
+                -H "Authorization: Bearer ${{ secrets.GHCR_PAT }}" \
+                -H "Accept: application/vnd.github.v3+json" \
+                "https://api.github.com/users/${{ github.repository_owner }}/packages/container/docker-comfyui/versions/$id"
+            done
