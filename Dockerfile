@@ -60,6 +60,9 @@ RUN pip install -r /app/comfyui/custom_nodes/ComfyUI_SLK_joy_caption_two/require
 RUN git clone https://github.com/Enemyx-net/VibeVoice-ComfyUI;
 RUN pip install -r /app/comfyui/custom_nodes/VibeVoice-ComfyUI/requirements.txt ;   
 
+RUN git clone https://github.com/snicolast/ComfyUI-Ovi.git
+RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-Ovi/requirements.txt ;   
+
 WORKDIR /app/comfyui
 
 # Copier le dossier workflow dans le conteneur
