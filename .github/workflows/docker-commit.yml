@@ -1,0 +1,54 @@
+name: Build & Push Docker Image on #build Commit (non-main branches)
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Check commit message for #build flag
+      id: check_message
+      run: |
+        COMMIT_MSG=$(git log -1 --pretty=%B)
+        echo "Commit message: $COMMIT_MSG"
+
+        if [[ "$COMMIT_MSG" =~ \#build ]]; then
+          echo "Build flag found."
+        else
+          echo "No #build flag found. Skipping build."
+          echo "skip_build=true" >> $GITHUB_ENV
+        fi
+
+    - name: Stop if no build flag found
+      if: env.skip_build == 'true'
+      run: |
+        echo "Skipping Docker build (no #build flag)."
+        exit 0
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GHCR_PAT }}
+
+    - name: Set image and tag
+      run: |
+        BRANCH=$(echo "${GITHUB_REF##*/}" | tr '/' '-')
+        IMAGE="ghcr.io/${{ github.repository_owner }}/docker-comfyui"
+        echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+        echo "TAG=$BRANCH" >> $GITHUB_ENV
+        echo "Building image: $IMAGE:$TAG"
+
+    - name: Build and push Docker image
+      run: |
+        docker build -t $IMAGE:$TAG .
+        docker push $IMAGE:$TAG
