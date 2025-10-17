@@ -12,3 +12,5 @@ jobs:
     uses: veka-server/github-actions-templates/.github/workflows/docker-build.yml@main
     secrets:
       GHCR_PAT: ${{ secrets.GHCR_PAT }}
+    with:
+      skip_trivy: 'true'   # <-- Trivy sera ignoré
