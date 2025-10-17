@@ -5,7 +5,7 @@ For detailed command-line flags, see [Official instructions](https://github.com/
 
 ![Docker Pulls](https://img.shields.io/github/v/release/veka-server/docker-comfyui?label=GHCR)
 
-![Build Docker](https://github.com/veka-server/docker-comfyui/actions/workflows/docker-release.yml/badge.svg)
+![Build Docker](https://github.com/veka-server/docker-comfyui/actions/workflows/build-central.yml/badge.svg)
 
 ```bash
 $ docker pull ghcr.io/veka-server/docker-comfyui:latest
