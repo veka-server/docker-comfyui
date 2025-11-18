@@ -67,7 +67,7 @@ RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-OpenAI-Compat-LLM-Node/requ
 RUN git clone https://github.com/mit-han-lab/ComfyUI-nunchaku;
 RUN pip install https://huggingface.co/gokaygokay/flux-game/resolve/main/insightface-0.7.3-cp311-cp311-linux_x86_64.whl;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-nunchaku/requirements.txt ;   
-RUN pip install https://github.com/nunchaku-tech/nunchaku/releases/download/v1.0.2/nunchaku-1.0.2+torch2.7-cp310-cp310-linux_x86_64.whl
+RUN pip install https://github.com/nunchaku-tech/nunchaku/releases/download/v1.0.2/nunchaku-1.0.2+torch2.10-cp311-cp311-linux_x86_64.whl
 
 WORKDIR /app/comfyui
 
