@@ -61,7 +61,12 @@ RUN git clone https://github.com/Enemyx-net/VibeVoice-ComfyUI;
 RUN pip install -r /app/comfyui/custom_nodes/VibeVoice-ComfyUI/requirements.txt ;   
 
 RUN git clone https://github.com/veka-server/ComfyUI-OpenAI-Compat-LLM-Node;
+RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-nunchaku/requirements.txt ;   
+
+# install de nunchaku
+RUN git clone https://github.com/mit-han-lab/ComfyUI-nunchaku;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-OpenAI-Compat-LLM-Node/requirements.txt ;   
+RUN pip install https://github.com/nunchaku-tech/nunchaku/releases/download/v1.0.2/nunchaku-1.0.2+torch2.7-cp310-cp310-linux_x86_64.whl
 
 WORKDIR /app/comfyui
 
