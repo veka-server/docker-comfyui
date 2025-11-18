@@ -64,7 +64,7 @@ RUN git clone https://github.com/veka-server/ComfyUI-OpenAI-Compat-LLM-Node;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-OpenAI-Compat-LLM-Node/requirements.txt ;   
 
 # install de nunchaku
-RUN git clone https://github.com/mit-han-lab/ComfyUI-nunchaku;
+RUN git clone https://github.com/Pizzawookiee/ComfyUI-nunchaku;
 RUN pip install https://huggingface.co/gokaygokay/flux-game/resolve/main/insightface-0.7.3-cp311-cp311-linux_x86_64.whl;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-nunchaku/requirements.txt ;   
 RUN pip install https://github.com/nunchaku-tech/nunchaku/releases/download/v1.0.2/nunchaku-1.0.2+torch2.9-cp311-cp311-linux_x86_64.whl
