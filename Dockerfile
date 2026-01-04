@@ -21,7 +21,7 @@ RUN apt-get update && \
 
 WORKDIR /app
     
-RUN git clone --depth 1 https://github.com/veka-server/ComfyUI.git comfyui
+RUN git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git comfyui
 
 RUN pip install -r /app/comfyui/requirements.txt ; 
     
