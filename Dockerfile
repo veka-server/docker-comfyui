@@ -69,6 +69,10 @@ RUN pip install https://huggingface.co/gokaygokay/flux-game/resolve/main/insight
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-nunchaku/requirements.txt ;   
 RUN pip install https://github.com/nunchaku-tech/nunchaku/releases/download/v1.0.2/nunchaku-1.0.2+torch2.9-cp311-cp311-linux_x86_64.whl
 
+# install des noeud pour qwen3-tts
+RUN git clone https://github.com/starsFriday/ComfyUI-Qwen3-TTS;
+RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-Qwen3-TTS/requirements.txt ;   
+
 WORKDIR /app/comfyui
 
 # Copier le dossier workflow dans le conteneur
