@@ -1,0 +1,43 @@
+name: Sync upstream releases
+
+on:
+  schedule:
+    - cron: "*/30 * * * *" # toutes les 30 minutes
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get latest upstream release
+        id: upstream
+        run: |
+          response=$(curl -s https://api.github.com/repos/Comfy-Org/ComfyUI/releases/latest)
+          tag=$(echo "$response" | jq -r .tag_name)
+
+          # enlever le "v" au début si présent
+          clean_tag=${tag#v}
+
+          echo "tag=$tag" >> $GITHUB_OUTPUT
+          echo "clean_tag=$clean_tag" >> $GITHUB_OUTPUT
+
+      - name: Check if release already exists
+        id: check
+        run: |
+          if gh release view "${{ steps.upstream.outputs.clean_tag }}" >/dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          gh release create "${{ steps.upstream.outputs.clean_tag }}" \
+            --title "Release ${{ steps.upstream.outputs.clean_tag }}" \
+            --notes "Synced from upstream release ${{ steps.upstream.outputs.tag }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
