@@ -2,21 +2,25 @@ name: Sync upstream releases
 
 on:
   schedule:
-    - cron: "*/30 * * * *" # toutes les 30 minutes
+    - cron: "*/30 * * * *"
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
       - name: Get latest upstream release
         id: upstream
         run: |
           response=$(curl -s https://api.github.com/repos/Comfy-Org/ComfyUI/releases/latest)
           tag=$(echo "$response" | jq -r .tag_name)
-
-          # enlever le "v" au début si présent
           clean_tag=${tag#v}
 
           echo "tag=$tag" >> $GITHUB_OUTPUT
