@@ -20,54 +20,23 @@ RUN apt-get update && \
     chmod +x /app/entrypoint.sh
 
 WORKDIR /app
-    
-RUN git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git comfyui
 
+# install comfyui stock
+RUN git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git comfyui
 RUN pip install -r /app/comfyui/requirements.txt ; 
     
 WORKDIR /app/comfyui/custom_nodes
 
+# Add support for GGUF
 RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF ; 
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt ;
 
-#RUN git clone https://github.com/kijai/ComfyUI-HunyuanVideoWrapper ComfyUI-HunyuanVideoWrapper ; 
-#RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-HunyuanVideoWrapper/requirements.txt ;
-
-RUN git clone https://github.com/stavsap/comfyui-ollama.git comfyui-ollama ;
-RUN pip install -r /app/comfyui/custom_nodes/comfyui-ollama/requirements.txt ;   
-
-#RUN git clone https://github.com/welltop-cn/ComfyUI-TeaCache.git ComfyUI-TeaCache ; 
-
+# add support multi GPU
 RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU ; 
 
-#RUN git clone https://github.com/fairy-root/ComfyUI-Show-Text.git ComfyUI-Show-Text ;
-
-#RUN git clone https://github.com/larsupb/comfyui-joycaption.git comfyui-joycaption ;
-#RUN pip install -r /app/comfyui/custom_nodes/comfyui-joycaption/requirements.txt ;   
-
-RUN git clone https://github.com/veka-server/ComfyUI_SLK_joy_caption_two.git ComfyUI_SLK_joy_caption_two ;
-RUN pip install -r /app/comfyui/custom_nodes/ComfyUI_SLK_joy_caption_two/requirements.txt ;   
-
-#RUN git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git comfyui_controlnet_aux ;
-#RUN pip install -r /app/comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt ;   
-
-# RUN git clone https://github.com/neverbiasu/ComfyUI-BAGEL.git ComfyUI-BAGEL ;
-# RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-BAGEL/requirements.txt ;   
-
-#RUN git clone https://github.com/wildminder/ComfyUI-VibeVoice.git;
-#RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-VibeVoice/requirements.txt ;   
-
-RUN git clone https://github.com/Enemyx-net/VibeVoice-ComfyUI;
-RUN pip install -r /app/comfyui/custom_nodes/VibeVoice-ComfyUI/requirements.txt ;   
-
+# node for llm api
 RUN git clone https://github.com/veka-server/ComfyUI-OpenAI-Compat-LLM-Node;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-OpenAI-Compat-LLM-Node/requirements.txt ;   
-
-# install de nunchaku
-RUN git clone https://github.com/mit-han-lab/ComfyUI-nunchaku;
-RUN pip install https://huggingface.co/gokaygokay/flux-game/resolve/main/insightface-0.7.3-cp311-cp311-linux_x86_64.whl;
-RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-nunchaku/requirements.txt ;   
-RUN pip install https://github.com/nunchaku-tech/nunchaku/releases/download/v1.0.2/nunchaku-1.0.2+torch2.9-cp311-cp311-linux_x86_64.whl
 
 # install des noeud pour qwen3-tts
 RUN git clone https://github.com/starsFriday/ComfyUI-Qwen3-TTS;
@@ -83,9 +52,6 @@ COPY comfyui/user/default/comfy.settings.json /app/comfyui/user/default/comfy.se
 
 # Ports exposés pour ComfyUI et VNC/NoVNC
 EXPOSE 6080 8188
-
-RUN mkdir -p /app/comfyui/models/Joy_caption_two
-RUN mkdir -p /app/comfyui/models/LLM
 
 VOLUME /app/comfyui/output
 VOLUME /app/comfyui/input
