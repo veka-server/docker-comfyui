@@ -20,9 +20,17 @@ jobs:
         id: upstream
         run: |
           response=$(curl -s https://api.github.com/repos/Comfy-Org/ComfyUI/releases/latest)
+      
           tag=$(echo "$response" | jq -r .tag_name)
+      
+          if [ -z "$tag" ] || [ "$tag" = "null" ]; then
+            echo "❌ Failed to get valid tag"
+            echo "$response"
+            exit 1
+          fi
+      
           clean_tag=${tag#v}
-
+      
           echo "tag=$tag" >> $GITHUB_OUTPUT
           echo "clean_tag=$clean_tag" >> $GITHUB_OUTPUT
 
