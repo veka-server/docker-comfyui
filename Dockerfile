@@ -44,7 +44,6 @@ RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-Qwen3-TTS/requirements.txt 
 
 # install des noeud pour ltx director
 RUN git clone https://github.com/WhatDreamscost/WhatDreamsCost-ComfyUI;
-RUN pip install -r /app/comfyui/custom_nodes/WhatDreamsCost-ComfyUI/requirements.txt ;   
 
 WORKDIR /app/comfyui
 
