@@ -28,7 +28,8 @@ RUN pip install -r /app/comfyui/requirements.txt ;
 WORKDIR /app/comfyui/custom_nodes
 
 # Add support for GGUF
-RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF ; 
+# RUN git clone https://github.com/city96/ComfyUI-GGUF ComfyUI-GGUF ; 
+RUN git clone https://github.com/molbal/ComfyUI-GGUF ComfyUI-GGUF ; 
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt ;
 
 # add support multi GPU
