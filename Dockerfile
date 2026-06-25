@@ -47,7 +47,7 @@ RUN git clone https://github.com/kijai/ComfyUI-KJNodes;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-KJNodes/requirements.txt ;   
 
 # boeud pour bypass filtre censure Krea 2
-RUN git clone https://github.com/nova452/ComfyUI-ConditioningKrea2Rebalance.git
+RUN git clone https://github.com/nova452/ComfyUI-ConditioningKrea2Rebalance
 
 # install des noeud pour ltx director
 RUN git clone https://github.com/WhatDreamscost/WhatDreamsCost-ComfyUI;
