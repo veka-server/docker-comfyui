@@ -3,7 +3,7 @@
 # Lancer ComfyUI
 pushd /app/comfyui
 # source venv/bin/activate
-python3 main.py --listen 0.0.0.0 --port 8188 --lowvram --disable-smart-memory
+python3 main.py --listen 0.0.0.0 --port 8188 --lowvram --disable-smart-memory --disable-api-nodes
 popd
 
 # 5. Garder le conteneur en cours d'exécution
