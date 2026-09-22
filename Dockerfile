@@ -6,19 +6,19 @@ COPY entrypoint.sh /app/entrypoint.sh
 # Configuration pour éviter les interactions durant l'installation des paquets
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Installer uniquement les paquets nécessaires et nettoyer le cache APT
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        git wget \
+        git wget build-essential \
+        python3.12 python3.12-venv python3.12-dev python3-pip \
         libgl1-mesa-dev libglib2.0-0 libsm6 libxrender1 libxext6 \
-        libgoogle-perftools4 libtcmalloc-minimal4 libcusparse11 && \
+        libgoogle-perftools4 libtcmalloc-minimal4 && \
     rm -rf /var/lib/apt/lists/* && \
-    groupadd -g 1000 comfyui && \
-    useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
+    (getent group 1000 || groupadd -g 1000 comfyui) && \
+    (id -u comfyui &>/dev/null || useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui) && \
     ln -s /app /home/comfyui && \
     chown -R comfyui:comfyui /app && \
     chmod +x /app/entrypoint.sh
-
+    
 WORKDIR /app
 
 # install comfyui stock
