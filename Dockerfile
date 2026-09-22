@@ -56,10 +56,6 @@ RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU
 RUN git clone https://github.com/veka-server/ComfyUI-OpenAI-Compat-LLM-Node;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-OpenAI-Compat-LLM-Node/requirements.txt ;
 
-# install des noeud pour qwen3-tts
-RUN git clone https://github.com/starsFriday/ComfyUI-Qwen3-TTS;
-RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-Qwen3-TTS/requirements.txt ;
-
 RUN git clone https://github.com/kijai/ComfyUI-KJNodes;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-KJNodes/requirements.txt ;
 
