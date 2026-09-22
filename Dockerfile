@@ -13,8 +13,8 @@ RUN apt-get update && \
         libgl1-mesa-dev libglib2.0-0 libsm6 libxrender1 libxext6 \
         libgoogle-perftools4 libtcmalloc-minimal4 && \
     rm -rf /var/lib/apt/lists/* && \
-    groupadd -g 1000 comfyui && \
-    useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui && \
+    (getent group 1000 || groupadd -g 1000 comfyui) && \
+    (id -u comfyui &>/dev/null || useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui) && \
     ln -s /app /home/comfyui && \
     chown -R comfyui:comfyui /app && \
     chmod +x /app/entrypoint.sh
