@@ -13,9 +13,18 @@ RUN apt-get update && \
         libgl1-mesa-dev libglib2.0-0 libsm6 libxrender1 libxext6 \
         libgoogle-perftools4 libtcmalloc-minimal4 && \
     rm -rf /var/lib/apt/lists/* && \
-    (getent group 1000 || groupadd -g 1000 comfyui) && \
-    (id -u comfyui &>/dev/null || useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui) && \
-    ln -s /app /home/comfyui && \
+    mkdir -p /app && \
+    if getent passwd 1000 >/dev/null; then \
+        OLDUSER=$(getent passwd 1000 | cut -d: -f1); \
+        OLDGROUP=$(getent group 1000 | cut -d: -f1); \
+        usermod -l comfyui -d /app "$OLDUSER"; \
+        groupmod -n comfyui "$OLDGROUP"; \
+        usermod -s /bin/bash comfyui; \
+    else \
+        groupadd -g 1000 comfyui && \
+        useradd -m -s /bin/bash -u 1000 -g 1000 --home /app comfyui; \
+    fi && \
+    ln -sf /app /home/comfyui && \
     chown -R comfyui:comfyui /app && \
     chmod +x /app/entrypoint.sh
 
