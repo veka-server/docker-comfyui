@@ -59,8 +59,7 @@ RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-OpenAI-Compat-LLM-Node/requ
 RUN git clone https://github.com/kijai/ComfyUI-KJNodes;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-KJNodes/requirements.txt ;
 
-# install des noeud pour ltx director
-RUN git clone https://github.com/WhatDreamscost/WhatDreamsCost-ComfyUI;
+RUN git clone https://github.com/entropicnoise/MiniMax-H3-Combined-Image-And-Reference-to-Video
 
 WORKDIR /app/comfyui
 
