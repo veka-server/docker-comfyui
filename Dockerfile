@@ -52,6 +52,13 @@ RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-GGUF/requirements.txt ;
 # add support multi GPU
 RUN git clone https://github.com/pollockjj/ComfyUI-MultiGPU.git ComfyUI-MultiGPU ;
 
+# Correctif : ComfyUI a retiré lowvram_available de comfy.model_management,
+# mais MultiGPU l'importe encore dans distorch_2.py.
+# Sans effet si MultiGPU corrige l'import en amont.
+RUN sed -i -E 's/^(\s*)(from comfy\.model_management import .*)lowvram_available, (.*)$/\1\2\3\n\1lowvram_available = True/' \
+        ComfyUI-MultiGPU/distorch_2.py && \
+    python -m py_compile ComfyUI-MultiGPU/distorch_2.py
+    
 # node for llm api
 RUN git clone https://github.com/veka-server/ComfyUI-OpenAI-Compat-LLM-Node;
 RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-OpenAI-Compat-LLM-Node/requirements.txt ;
