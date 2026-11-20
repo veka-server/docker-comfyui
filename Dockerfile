@@ -68,6 +68,10 @@ RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-KJNodes/requirements.txt ;
 
 RUN git clone https://github.com/entropicnoise/MiniMax-H3-Combined-Image-And-Reference-to-Video
 
+RUN git clone https://github.com/Pixelailabs/ComfyUI-LongCat-Avatar-PixelAILabs
+RUN pip install -r /app/comfyui/custom_nodes/ComfyUI-LongCat-Avatar-PixelAILabs/requirements.txt ;
+
+
 WORKDIR /app/comfyui
 
 # Copier le dossier workflow dans le conteneur
